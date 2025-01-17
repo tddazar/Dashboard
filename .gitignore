@@ -1,0 +1,12 @@
+# Node.js
+node_modules/
+dist/
+
+# ASP.NET
+bin/
+obj/
+.vs/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
