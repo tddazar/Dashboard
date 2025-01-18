@@ -1,0 +1,34 @@
+<h2>Devices</h2>
+<ul>
+  <li *ngFor="let device of devices">
+    <div *ngIf="editingDevice?.id !== device.id; else editMode">
+      {{ device.name }} ({{ device.type }}) - 
+      <span [class.online]="device.isOnline">Online</span>
+      <span [class.offline]="!device.isOnline">Offline</span>
+      <button (click)="startEdit(device)">Edit</button>
+      <button (click)="removeDevice(device.id)">Delete</button>
+    </div>
+
+    <ng-template #editMode>
+      <input [(ngModel)]="editingDevice.name" placeholder="Name" />
+      <input [(ngModel)]="editingDevice.type" placeholder="Type" />
+      <label>
+        Online:
+        <input type="checkbox" [(ngModel)]="editingDevice.isOnline" />
+      </label>
+      <button (click)="saveEdit()">Save</button>
+      <button (click)="cancelEdit()">Cancel</button>
+    </ng-template>
+  </li>
+</ul>
+
+<h3>Add Device</h3>
+<form (ngSubmit)="addDevice()">
+  <input [(ngModel)]="newDevice.name" placeholder="Name" name="name" required />
+  <input [(ngModel)]="newDevice.type" placeholder="Type" name="type" required />
+  <label>
+    Online:
+    <input type="checkbox" [(ngModel)]="newDevice.isOnline" name="isOnline" />
+  </label>
+  <button type="submit">Add</button>
+</form>
